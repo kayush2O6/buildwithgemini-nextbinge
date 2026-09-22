@@ -304,9 +304,9 @@
 </header>
 <div id="log"></div>
 <div id="example-prompts">
-  <button class="prompt-chip" type="button" data-prompt="I have 45 minutes to unwind tonight and love mind-bending sci-fi thrillers. What should I watch?">⏱️ <strong>45 min unwind:</strong> sci-fi thriller</button>
-  <button class="prompt-chip" type="button" data-prompt="I have a long weekend coming, help me pick something to binge watch that I can finish in 3 days.">🍿 <strong>Long weekend:</strong> 3-day binge watch</button>
-  <button class="prompt-chip" type="button" data-prompt="Show me recommendations for mystery and thriller shows with media cards.">🎬 <strong>Top picks:</strong> mystery &amp; thriller series</button>
+  <button class="prompt-chip" type="button" data-prompt="Recommend a top mind-bending sci-fi movie and generate a cinematic poster for it.">🎨 <strong>Movie Poster:</strong> sci-fi pick with poster art</button>
+  <button class="prompt-chip" type="button" data-prompt="Suggest a gripping mystery series and generate a small teaser video preview for it.">🎬 <strong>Teaser Video:</strong> mystery series with teaser clip</button>
+  <button class="prompt-chip" type="button" data-prompt="Recommend a thrilling movie or series to watch, and generate both a cinematic poster and a small teaser video for it.">🍿 <strong>Poster &amp; Video:</strong> top pick with full visual preview</button>
 </div>
 <form id="form">
   <input id="input" placeholder="Ask NextBinge for recommendations, movies, shows…" autocomplete="off" autofocus>
@@ -500,7 +500,7 @@ function renderReply(b, parts) {
 
 // Initial welcoming greeting
 const welcomeBubble = bubble("agent");
-welcomeBubble.textContent = "👋 Welcome to NextBinge! What are you in the mood to watch tonight? Pick an example prompt below or tell me your favorite genre and time limit!";
+welcomeBubble.textContent = "👋 Welcome to NextBinge! What are you in the mood to watch tonight? Pick a recommended prompt below to discover titles, generate cinematic posters, and create teaser preview videos!";
 
 // The proxy returns { parts: [{kind:"text",text} | {kind:"a2ui",data}] }.
 form.addEventListener("submit", async (ev) => {
