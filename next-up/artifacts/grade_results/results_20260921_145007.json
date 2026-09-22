@@ -1,0 +1,1023 @@
+{
+  "eval_case_results": [
+    {
+      "eval_case_index": 0,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 5.0,
+              "explanation": "The assistant accurately calculated the 15% tip using the provided tools, rounded properly to standard currency cents, and presented both the tip and total clearly.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 1,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 5.0,
+              "explanation": "The agent used the appropriate tool to perform the conversion accurately and provided a clear, direct, and helpful response.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 2,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "custom_response_quality": {
+              "metric_name": "custom_response_quality",
+              "score": 5.0,
+              "explanation": "The agent correctly used the `convert_units` tool to accurately convert 72 degrees Fahrenheit to Celsius and provided a clear, direct, and concise response.",
+              "rubric_verdicts": null,
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary_metrics": [
+    {
+      "metric_name": "custom_response_quality",
+      "num_cases_total": 3,
+      "num_cases_valid": 3,
+      "num_cases_error": 0,
+      "mean_score": 5.0,
+      "stdev_score": 0.0,
+      "pass_rate": null
+    }
+  ],
+  "win_rates": null,
+  "evaluation_dataset": [
+    {
+      "bigquery_source": null,
+      "gcs_source": null,
+      "eval_cases": [
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Calculate a 15% tip on a bill of $85.50",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "A 15% tip on a bill of $85.50 is **$12.83** (rounded from $12.825).\n\n* **Tip amount:** $12.83\n* **Total bill with tip:** $98.33",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null,
+                    "audio_transcription": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": null,
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "math_percentage_calculation",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "math_converter_agent": {
+                "agent_id": "math_converter_agent",
+                "agent_type": "LlmAgent",
+                "description": "",
+                "instruction": "You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Safely evaluates a mathematical expression and returns the calculated result.\n\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\n\nArgs:\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\n\nReturns:\n    A dictionary with 'status', 'expression', and 'result' or 'error'.",
+                        "name": "calculate_expression",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "expression": {
+                              "title": "Expression",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "expression"
+                          ],
+                          "title": "calculate_expressionParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Converts a value between common units of measurement (length, weight/mass, volume, temperature).\n\nArgs:\n    value: The numerical value to convert (e.g. 100, 32.5).\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\n\nReturns:\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.",
+                        "name": "convert_units",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "value": {
+                              "title": "Value",
+                              "type": "number"
+                            },
+                            "from_unit": {
+                              "title": "From Unit",
+                              "type": "string"
+                            },
+                            "to_unit": {
+                              "title": "To Unit",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "from_unit",
+                            "to_unit"
+                          ],
+                          "title": "convert_unitsParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "call_554270",
+                            "args": {
+                              "expression": "85.50 * 0.15"
+                            },
+                            "name": "calculate_expression",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-21T14:49:42.512761Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "call_554270",
+                            "name": "calculate_expression",
+                            "response": {
+                              "status": "success",
+                              "expression": "85.50 * 0.15",
+                              "result": 12.825
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-21T14:49:50.853658Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "call_398559",
+                            "args": {
+                              "expression": "85.50 + 12.825"
+                            },
+                            "name": "calculate_expression",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-21T14:49:50.856094Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "call_398559",
+                            "name": "calculate_expression",
+                            "response": {
+                              "status": "success",
+                              "expression": "85.50 + 12.825",
+                              "result": 98.325
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-21T14:50:02.202038Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "A 15% tip on a bill of $85.50 is **$12.83** (rounded from $12.825).\n\n* **Tip amount:** $12.83\n* **Total bill with tip:** $98.33",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-21T14:50:02.204569Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null,
+          "interactions_data_source": null
+        },
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "Convert 100 kilometers to miles",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "100 kilometers is approximately **62.14 miles** (or 62.1371 miles).",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null,
+                    "audio_transcription": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": null,
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "unit_conversion_distance",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "math_converter_agent": {
+                "agent_id": "math_converter_agent",
+                "agent_type": "LlmAgent",
+                "description": "",
+                "instruction": "You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Safely evaluates a mathematical expression and returns the calculated result.\n\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\n\nArgs:\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\n\nReturns:\n    A dictionary with 'status', 'expression', and 'result' or 'error'.",
+                        "name": "calculate_expression",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "expression": {
+                              "title": "Expression",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "expression"
+                          ],
+                          "title": "calculate_expressionParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Converts a value between common units of measurement (length, weight/mass, volume, temperature).\n\nArgs:\n    value: The numerical value to convert (e.g. 100, 32.5).\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\n\nReturns:\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.",
+                        "name": "convert_units",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "value": {
+                              "title": "Value",
+                              "type": "number"
+                            },
+                            "from_unit": {
+                              "title": "From Unit",
+                              "type": "string"
+                            },
+                            "to_unit": {
+                              "title": "To Unit",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "from_unit",
+                            "to_unit"
+                          ],
+                          "title": "convert_unitsParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "call_1138169",
+                            "args": {
+                              "value": 100,
+                              "from_unit": "km",
+                              "to_unit": "miles"
+                            },
+                            "name": "convert_units",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-21T14:49:42.454550Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "call_1138169",
+                            "name": "convert_units",
+                            "response": {
+                              "status": "success",
+                              "original_value": 100,
+                              "from_unit": "km",
+                              "converted_value": 62.1371,
+                              "to_unit": "miles"
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-21T14:49:44.693561Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "100 kilometers is approximately **62.14 miles** (or 62.1371 miles).",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-21T14:49:44.696647Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null,
+          "interactions_data_source": null
+        },
+        {
+          "prompt": {
+            "parts": [
+              {
+                "media_resolution": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "file_data": null,
+                "function_call": null,
+                "function_response": null,
+                "inline_data": null,
+                "text": "What is 72 degrees Fahrenheit in Celsius?",
+                "thought": null,
+                "thought_signature": null,
+                "video_metadata": null,
+                "tool_call": null,
+                "tool_response": null,
+                "part_metadata": null,
+                "audio_transcription": null
+              }
+            ],
+            "role": "user"
+          },
+          "responses": [
+            {
+              "response": {
+                "parts": [
+                  {
+                    "media_resolution": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "file_data": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "inline_data": null,
+                    "text": "**72\u00b0F** is approximately **22.22\u00b0C**.",
+                    "thought": null,
+                    "thought_signature": null,
+                    "video_metadata": null,
+                    "tool_call": null,
+                    "tool_response": null,
+                    "part_metadata": null,
+                    "audio_transcription": null
+                  }
+                ],
+                "role": "model"
+              }
+            }
+          ],
+          "reference": null,
+          "system_instruction": null,
+          "conversation_history": null,
+          "rubric_groups": null,
+          "eval_case_id": "temperature_conversion",
+          "intermediate_events": null,
+          "agent_info": null,
+          "agent_data": {
+            "agents": {
+              "math_converter_agent": {
+                "agent_id": "math_converter_agent",
+                "agent_type": "LlmAgent",
+                "description": "",
+                "instruction": "You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.",
+                "tools": [
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Safely evaluates a mathematical expression and returns the calculated result.\n\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\n\nArgs:\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\n\nReturns:\n    A dictionary with 'status', 'expression', and 'result' or 'error'.",
+                        "name": "calculate_expression",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "expression": {
+                              "title": "Expression",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "expression"
+                          ],
+                          "title": "calculate_expressionParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  },
+                  {
+                    "retrieval": null,
+                    "computer_use": null,
+                    "file_search": null,
+                    "google_search": null,
+                    "google_maps": null,
+                    "code_execution": null,
+                    "enterprise_web_search": null,
+                    "function_declarations": [
+                      {
+                        "description": "Converts a value between common units of measurement (length, weight/mass, volume, temperature).\n\nArgs:\n    value: The numerical value to convert (e.g. 100, 32.5).\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\n\nReturns:\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.",
+                        "name": "convert_units",
+                        "parameters": null,
+                        "parameters_json_schema": {
+                          "properties": {
+                            "value": {
+                              "title": "Value",
+                              "type": "number"
+                            },
+                            "from_unit": {
+                              "title": "From Unit",
+                              "type": "string"
+                            },
+                            "to_unit": {
+                              "title": "To Unit",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "from_unit",
+                            "to_unit"
+                          ],
+                          "title": "convert_unitsParams",
+                          "type": "object"
+                        },
+                        "response": null,
+                        "response_json_schema": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "behavior": null
+                      }
+                    ],
+                    "google_search_retrieval": null,
+                    "parallel_ai_search": null,
+                    "url_context": null,
+                    "mcp_servers": null,
+                    "exa_ai_search": null
+                  }
+                ],
+                "sub_agents": []
+              }
+            },
+            "turns": [
+              {
+                "turn_index": 0,
+                "turn_id": "turn_0",
+                "events": [
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": {
+                            "id": "call_176001",
+                            "args": {
+                              "value": 72,
+                              "from_unit": "fahrenheit",
+                              "to_unit": "celsius"
+                            },
+                            "name": "convert_units",
+                            "partial_args": null,
+                            "will_continue": null
+                          },
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-21T14:49:42.516057Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": {
+                            "will_continue": null,
+                            "scheduling": null,
+                            "parts": null,
+                            "id": "call_176001",
+                            "name": "convert_units",
+                            "response": {
+                              "status": "success",
+                              "original_value": 72,
+                              "from_unit": "fahrenheit",
+                              "converted_value": 22.2222,
+                              "to_unit": "celsius"
+                            }
+                          },
+                          "inline_data": null,
+                          "text": null,
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "user"
+                    },
+                    "event_time": "2026-09-21T14:49:47.637266Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  },
+                  {
+                    "author": "math_converter_agent",
+                    "content": {
+                      "parts": [
+                        {
+                          "media_resolution": null,
+                          "code_execution_result": null,
+                          "executable_code": null,
+                          "file_data": null,
+                          "function_call": null,
+                          "function_response": null,
+                          "inline_data": null,
+                          "text": "**72\u00b0F** is approximately **22.22\u00b0C**.",
+                          "thought": null,
+                          "thought_signature": null,
+                          "video_metadata": null,
+                          "tool_call": null,
+                          "tool_response": null,
+                          "part_metadata": null,
+                          "audio_transcription": null
+                        }
+                      ],
+                      "role": "model"
+                    },
+                    "event_time": "2026-09-21T14:49:47.640860Z",
+                    "state_delta": null,
+                    "active_tools": null
+                  }
+                ]
+              }
+            ]
+          },
+          "user_scenario": null,
+          "interactions_data_source": null
+        }
+      ],
+      "eval_dataset_df": null,
+      "candidate_name": null
+    }
+  ],
+  "metadata": {
+    "candidate_names": [
+      "candidate_1"
+    ],
+    "dataset_name": null,
+    "dataset_id": null,
+    "creation_timestamp": "2026-09-21T14:50:07.426409Z",
+    "dataset": [
+      {
+        "prompt_display_text": "Calculate a 15% tip on a bill of $85.50",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Calculate a 15% tip on a bill of $85.50\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "",
+        "reference_raw_json": "",
+        "response_display_text": "A 15% tip on a bill of $85.50 is **$12.83** (rounded from $12.825).\n\n* **Tip amount:** $12.83\n* **Total bill with tip:** $98.33",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"A 15% tip on a bill of $85.50 is **$12.83** (rounded from $12.825).\\n\\n* **Tip amount:** $12.83\\n* **Total bill with tip:** $98.33\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"math_converter_agent\": {\"agent_id\": \"math_converter_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"\", \"instruction\": \"You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.\", \"tools\": [{\"function_declarations\": [{\"description\": \"Safely evaluates a mathematical expression and returns the calculated result.\\n\\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\\n\\nArgs:\\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\\n\\nReturns:\\n    A dictionary with 'status', 'expression', and 'result' or 'error'.\", \"name\": \"calculate_expression\", \"parameters_json_schema\": {\"properties\": {\"expression\": {\"title\": \"Expression\", \"type\": \"string\"}}, \"required\": [\"expression\"], \"title\": \"calculate_expressionParams\", \"type\": \"object\"}, \"response_json_schema\": {\"additionalProperties\": true, \"type\": \"object\"}}]}, {\"function_declarations\": [{\"description\": \"Converts a value between common units of measurement (length, weight/mass, volume, temperature).\\n\\nArgs:\\n    value: The numerical value to convert (e.g. 100, 32.5).\\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\\n\\nReturns:\\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.\", \"name\": \"convert_units\", \"parameters_json_schema\": {\"properties\": {\"value\": {\"title\": \"Value\", \"type\": \"number\"}, \"from_unit\": {\"title\": \"From Unit\", \"type\": \"string\"}, \"to_unit\": {\"title\": \"To Unit\", \"type\": \"string\"}}, \"required\": [\"value\", \"from_unit\", \"to_unit\"], \"title\": \"convert_unitsParams\", \"type\": \"object\"}, \"response_json_schema\": {\"additionalProperties\": true, \"type\": \"object\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"call_554270\", \"args\": {\"expression\": \"85.50 * 0.15\"}, \"name\": \"calculate_expression\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-21T14:49:42.512761Z\"}, {\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"call_554270\", \"name\": \"calculate_expression\", \"response\": {\"status\": \"success\", \"expression\": \"85.50 * 0.15\", \"result\": 12.825}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-21T14:49:50.853658Z\"}, {\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"call_398559\", \"args\": {\"expression\": \"85.50 + 12.825\"}, \"name\": \"calculate_expression\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-21T14:49:50.856094Z\"}, {\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"call_398559\", \"name\": \"calculate_expression\", \"response\": {\"status\": \"success\", \"expression\": \"85.50 + 12.825\", \"result\": 98.325}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-21T14:50:02.202038Z\"}, {\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"text\": \"A 15% tip on a bill of $85.50 is **$12.83** (rounded from $12.825).\\n\\n* **Tip amount:** $12.83\\n* **Total bill with tip:** $98.33\"}], \"role\": \"model\"}, \"event_time\": \"2026-09-21T14:50:02.204569Z\"}]}]}"
+      },
+      {
+        "prompt_display_text": "Convert 100 kilometers to miles",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"Convert 100 kilometers to miles\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "",
+        "reference_raw_json": "",
+        "response_display_text": "100 kilometers is approximately **62.14 miles** (or 62.1371 miles).",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"100 kilometers is approximately **62.14 miles** (or 62.1371 miles).\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"math_converter_agent\": {\"agent_id\": \"math_converter_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"\", \"instruction\": \"You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.\", \"tools\": [{\"function_declarations\": [{\"description\": \"Safely evaluates a mathematical expression and returns the calculated result.\\n\\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\\n\\nArgs:\\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\\n\\nReturns:\\n    A dictionary with 'status', 'expression', and 'result' or 'error'.\", \"name\": \"calculate_expression\", \"parameters_json_schema\": {\"properties\": {\"expression\": {\"title\": \"Expression\", \"type\": \"string\"}}, \"required\": [\"expression\"], \"title\": \"calculate_expressionParams\", \"type\": \"object\"}, \"response_json_schema\": {\"additionalProperties\": true, \"type\": \"object\"}}]}, {\"function_declarations\": [{\"description\": \"Converts a value between common units of measurement (length, weight/mass, volume, temperature).\\n\\nArgs:\\n    value: The numerical value to convert (e.g. 100, 32.5).\\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\\n\\nReturns:\\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.\", \"name\": \"convert_units\", \"parameters_json_schema\": {\"properties\": {\"value\": {\"title\": \"Value\", \"type\": \"number\"}, \"from_unit\": {\"title\": \"From Unit\", \"type\": \"string\"}, \"to_unit\": {\"title\": \"To Unit\", \"type\": \"string\"}}, \"required\": [\"value\", \"from_unit\", \"to_unit\"], \"title\": \"convert_unitsParams\", \"type\": \"object\"}, \"response_json_schema\": {\"additionalProperties\": true, \"type\": \"object\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"call_1138169\", \"args\": {\"value\": 100, \"from_unit\": \"km\", \"to_unit\": \"miles\"}, \"name\": \"convert_units\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-21T14:49:42.454550Z\"}, {\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"call_1138169\", \"name\": \"convert_units\", \"response\": {\"status\": \"success\", \"original_value\": 100, \"from_unit\": \"km\", \"converted_value\": 62.1371, \"to_unit\": \"miles\"}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-21T14:49:44.693561Z\"}, {\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"text\": \"100 kilometers is approximately **62.14 miles** (or 62.1371 miles).\"}], \"role\": \"model\"}, \"event_time\": \"2026-09-21T14:49:44.696647Z\"}]}]}"
+      },
+      {
+        "prompt_display_text": "What is 72 degrees Fahrenheit in Celsius?",
+        "prompt_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"What is 72 degrees Fahrenheit in Celsius?\"\n    }\n  ],\n  \"role\": \"user\"\n}",
+        "reference": "",
+        "reference_raw_json": "",
+        "response_display_text": "**72\u00b0F** is approximately **22.22\u00b0C**.",
+        "response_raw_json": "{\n  \"parts\": [\n    {\n      \"text\": \"**72\u00b0F** is approximately **22.22\u00b0C**.\"\n    }\n  ],\n  \"role\": \"model\"\n}",
+        "intermediate_events": null,
+        "agent_data": "{\"agents\": {\"math_converter_agent\": {\"agent_id\": \"math_converter_agent\", \"agent_type\": \"LlmAgent\", \"description\": \"\", \"instruction\": \"You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.\", \"tools\": [{\"function_declarations\": [{\"description\": \"Safely evaluates a mathematical expression and returns the calculated result.\\n\\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\\n\\nArgs:\\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\\n\\nReturns:\\n    A dictionary with 'status', 'expression', and 'result' or 'error'.\", \"name\": \"calculate_expression\", \"parameters_json_schema\": {\"properties\": {\"expression\": {\"title\": \"Expression\", \"type\": \"string\"}}, \"required\": [\"expression\"], \"title\": \"calculate_expressionParams\", \"type\": \"object\"}, \"response_json_schema\": {\"additionalProperties\": true, \"type\": \"object\"}}]}, {\"function_declarations\": [{\"description\": \"Converts a value between common units of measurement (length, weight/mass, volume, temperature).\\n\\nArgs:\\n    value: The numerical value to convert (e.g. 100, 32.5).\\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\\n\\nReturns:\\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.\", \"name\": \"convert_units\", \"parameters_json_schema\": {\"properties\": {\"value\": {\"title\": \"Value\", \"type\": \"number\"}, \"from_unit\": {\"title\": \"From Unit\", \"type\": \"string\"}, \"to_unit\": {\"title\": \"To Unit\", \"type\": \"string\"}}, \"required\": [\"value\", \"from_unit\", \"to_unit\"], \"title\": \"convert_unitsParams\", \"type\": \"object\"}, \"response_json_schema\": {\"additionalProperties\": true, \"type\": \"object\"}}]}], \"sub_agents\": []}}, \"turns\": [{\"turn_index\": 0, \"turn_id\": \"turn_0\", \"events\": [{\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"function_call\": {\"id\": \"call_176001\", \"args\": {\"value\": 72, \"from_unit\": \"fahrenheit\", \"to_unit\": \"celsius\"}, \"name\": \"convert_units\"}}], \"role\": \"model\"}, \"event_time\": \"2026-09-21T14:49:42.516057Z\"}, {\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"function_response\": {\"id\": \"call_176001\", \"name\": \"convert_units\", \"response\": {\"status\": \"success\", \"original_value\": 72, \"from_unit\": \"fahrenheit\", \"converted_value\": 22.2222, \"to_unit\": \"celsius\"}}}], \"role\": \"user\"}, \"event_time\": \"2026-09-21T14:49:47.637266Z\"}, {\"author\": \"math_converter_agent\", \"content\": {\"parts\": [{\"text\": \"**72\u00b0F** is approximately **22.22\u00b0C**.\"}], \"role\": \"model\"}, \"event_time\": \"2026-09-21T14:49:47.640860Z\"}]}]}"
+      }
+    ]
+  },
+  "agent_info": null
+}

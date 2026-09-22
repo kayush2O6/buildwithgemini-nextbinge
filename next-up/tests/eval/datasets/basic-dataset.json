@@ -1,0 +1,341 @@
+{
+  "eval_cases": [
+    {
+      "eval_case_id": "time_constrained_recommendation",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "I have 45 minutes to watch something tonight. What show episode or title should I watch from your catalog?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "Recommendations should fit comfortably within the ~45 minute window (such as an episode of The Bear at ~30 mins, or Severance at ~50 mins) and avoid recommending full length 2+ hour feature films like Interstellar. The response should specify the format, runtime per episode, genres, and a brief overview."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "genre_discovery_sci_fi_mystery",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "I love mind-bending sci-fi mysteries with complex plots. Search your catalog and suggest what I should watch next."
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should search catalog titles matching Sci-Fi, Mystery, and mind-bending vibes, highlighting titles like Severance, Dark, or Arrival. For each recommendation, provide title, format, duration or episode count, genre tags, synopsis, and why it matches the requested vibe."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "live_metadata_external_title",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Can you look up live streaming details and poster art for the TV show 'Fallout'?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should fetch live title details for Fallout, returning its release year (2024), platform/network (Amazon Prime Video), genres (Action, Adventure, Drama, Sci-Fi), episode runtime, and official poster art URL."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "rag_grounding_dark_time_travel",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "According to your entertainment reference guide, how do the 33-year cycle and the bootstrap paradox work in Dark?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should consult the entertainment reference guide and explain that Dark's 33-year cycle links 1888, 1921, 1953, 1986, 2019, and 2052 due to celestial alignments and anomalies in Winden. It should also explain the bootstrap paradox / causal loops where items like Tannhaus's book 'A Journey Through Time' or the brass time machine Apparat exist without an initial creator."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "rag_grounding_arrival_linguistics",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Can you explain the linguistic relativity concept in Arrival based on your entertainment reference guide?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should retrieve information from the entertainment guide explaining the Sapir-Whorf hypothesis and linguistic relativity in Arrival: how immersing in the circular written logograms of Heptapod B rewires Dr. Louise Banks's cognition to perceive time non-linearly as an unbroken continuum of past, present, and future."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "watch_tracking_and_feedback",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "I just finished watching Chernobyl and loved it. Please mark it as watched with a 9.5 rating and note that it was haunting and intensely gripping."
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should mark Chernobyl as watched in the catalog, recording the user rating of 9.5 and feedback notes ('haunting and intensely gripping'), and confirm the update to the viewer."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_high_rotten_tomatoes_critics_choice",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "I only want to watch critically acclaimed cinema tonight. Can you recommend top-rated movies with a Rotten Tomatoes score above 90% from your Hollywood collection, and tell me their genre and why critics loved them?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should recommend top-tier critically acclaimed Hollywood films with Rotten Tomatoes scores exceeding 90% (such as Toy Story 3 [99%], Up [98%], Ratatouille [97%], The Hurt Locker [97%], The King's Speech [95%], or The Dark Knight [94%]). The response should detail each movie's title, release year, lead studio, genre, critics rating, and a synopsis highlighting why it achieved widespread critical acclaim."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_audience_favorite_crowd_pleaser",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "I want an undisputed crowd-pleaser that everyday audiences went wild for. What are top Hollywood movies with an audience score of 90% or higher?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should recommend verified audience favorites with audience scores of 90% or higher (such as The Dark Knight [96%], Inception [93%], 50/50 [93%], Warrior [93%], Avatar [92%], or Harry Potter and the Deathly Hallows Part 2 [92%]). The response should provide the movie title, studio, audience score, genre, runtime, and explanation of why audiences responded so enthusiastically."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_story_archetype_underdog",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "I'm in the mood for an inspiring underdog story where someone overcomes overwhelming odds. What Hollywood movies fit that theme?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should identify movies categorized under the Underdog story archetype (such as The King's Speech, Warrior, The Fighter, Moneyball, or Slumdog Millionaire). The response should explain the central protagonist's struggle, how they conquer adversity, the film's genre, and lead studio."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_story_archetype_quest",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Can you recommend a great Quest film from your Hollywood dataset where the characters embark on an epic or heartfelt journey?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should recommend movies categorized under the Quest story archetype (such as Up, Harry Potter and the Order of the Phoenix, Star Trek, or Shrek the Third). The response should describe the goal of the quest, emotional stakes, genre, lead studio, and duration."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_story_archetype_monster_force",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "I want a high-octane spectacle featuring massive creatures, alien invaders, or catastrophic monster forces. What Hollywood movies do you recommend?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should recommend movies categorized under the Monster Force story archetype (such as Transformers, Cloverfield, Super 8, or Godzilla). The response should outline the colossal threat or alien/robotic conflict, visual effects spectacle, lead studio, and action rating."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_studio_disney_pixar_animation",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "My family wants to watch a top-tier animated movie from Disney or Pixar. What are the highest-rated options in your Hollywood dataset?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should recommend acclaimed Disney/Pixar animation masterpieces (such as Toy Story 3, Up, Ratatouille, WALL-E, or Tangled). The response should highlight their stellar Rotten Tomatoes ratings (95%+), lead studio (Disney/Pixar), story themes, and family-friendly appeal."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_studio_warner_bros_blockbusters",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "I love gritty, ambitious blockbusters from Warner Bros, especially films by Christopher Nolan. What movies from your Hollywood catalog match?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should recommend Warner Bros blockbusters like The Dark Knight, Inception, or The Dark Knight Rises. The response should provide the runtime, director or lead studio (Warner Bros), Rotten Tomatoes/audience reception, and why these films represent landmark cinematic thrillers."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_high_profitability_indie_gems",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "What are some of the most profitable low-budget indie movies or breakout comedies in your Hollywood records?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should highlight standout high-profitability films that achieved massive return on investment relative to their modest production budgets (such as Juno [3,085% ROI], Superbad [849% ROI], or Paranormal Activity). The response should cite the budget, worldwide gross, lead studio or independent distributor, and cultural impact."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_critics_vs_audience_divergence",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Can you find a fun popcorn action movie where everyday audiences loved it way more than snobby film critics did?"
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should highlight Hollywood movies with a notable positive audience-critic divergence (such as Transformers with an 89% audience score vs. 57% Rotten Tomatoes, or National Treasure: Book of Secrets with 72% audience score vs. 31% RT). The response should analyze the divergence and explain why the movie succeeds as pure popcorn escapism despite mixed critical reviews."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "eval_case_id": "hollywood_comedy_maturation_coming_of_age",
+      "prompt": {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Recommend a smart, hilarious coming-of-age comedy about growing up and personal maturation from Hollywood's best."
+          }
+        ]
+      },
+      "reference": {
+        "response": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The agent should recommend acclaimed coming-of-age and maturation comedies (such as Juno, Superbad, or 50/50). The response should describe the comedic tone, character maturation arc, Rotten Tomatoes score, and lead studio."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+

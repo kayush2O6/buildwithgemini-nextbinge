@@ -1,0 +1,512 @@
+{
+  "eval_cases": [
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Calculate a 15% tip on a bill of $85.50"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "A 15% tip on a bill of $85.50 is **$12.83** (rounded from $12.825).\n\n* **Tip amount:** $12.83\n* **Total bill with tip:** $98.33"
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "math_percentage_calculation",
+      "agent_data": {
+        "agents": {
+          "math_converter_agent": {
+            "agent_id": "math_converter_agent",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Safely evaluates a mathematical expression and returns the calculated result.\n\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\n\nArgs:\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\n\nReturns:\n    A dictionary with 'status', 'expression', and 'result' or 'error'.",
+                    "name": "calculate_expression",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "expression": {
+                          "title": "Expression",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "expression"
+                      ],
+                      "title": "calculate_expressionParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Converts a value between common units of measurement (length, weight/mass, volume, temperature).\n\nArgs:\n    value: The numerical value to convert (e.g. 100, 32.5).\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\n\nReturns:\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.",
+                    "name": "convert_units",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "value": {
+                          "title": "Value",
+                          "type": "number"
+                        },
+                        "from_unit": {
+                          "title": "From Unit",
+                          "type": "string"
+                        },
+                        "to_unit": {
+                          "title": "To Unit",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "from_unit",
+                        "to_unit"
+                      ],
+                      "title": "convert_unitsParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "call_554270",
+                        "args": {
+                          "expression": "85.50 * 0.15"
+                        },
+                        "name": "calculate_expression"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-21T14:49:42.512761Z"
+              },
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "call_554270",
+                        "name": "calculate_expression",
+                        "response": {
+                          "status": "success",
+                          "expression": "85.50 * 0.15",
+                          "result": 12.825
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-21T14:49:50.853658Z"
+              },
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "call_398559",
+                        "args": {
+                          "expression": "85.50 + 12.825"
+                        },
+                        "name": "calculate_expression"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-21T14:49:50.856094Z"
+              },
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "call_398559",
+                        "name": "calculate_expression",
+                        "response": {
+                          "status": "success",
+                          "expression": "85.50 + 12.825",
+                          "result": 98.325
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-21T14:50:02.202038Z"
+              },
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "A 15% tip on a bill of $85.50 is **$12.83** (rounded from $12.825).\n\n* **Tip amount:** $12.83\n* **Total bill with tip:** $98.33"
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-21T14:50:02.204569Z"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "Convert 100 kilometers to miles"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "100 kilometers is approximately **62.14 miles** (or 62.1371 miles)."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "unit_conversion_distance",
+      "agent_data": {
+        "agents": {
+          "math_converter_agent": {
+            "agent_id": "math_converter_agent",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Safely evaluates a mathematical expression and returns the calculated result.\n\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\n\nArgs:\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\n\nReturns:\n    A dictionary with 'status', 'expression', and 'result' or 'error'.",
+                    "name": "calculate_expression",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "expression": {
+                          "title": "Expression",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "expression"
+                      ],
+                      "title": "calculate_expressionParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Converts a value between common units of measurement (length, weight/mass, volume, temperature).\n\nArgs:\n    value: The numerical value to convert (e.g. 100, 32.5).\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\n\nReturns:\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.",
+                    "name": "convert_units",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "value": {
+                          "title": "Value",
+                          "type": "number"
+                        },
+                        "from_unit": {
+                          "title": "From Unit",
+                          "type": "string"
+                        },
+                        "to_unit": {
+                          "title": "To Unit",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "from_unit",
+                        "to_unit"
+                      ],
+                      "title": "convert_unitsParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "call_1138169",
+                        "args": {
+                          "value": 100,
+                          "from_unit": "km",
+                          "to_unit": "miles"
+                        },
+                        "name": "convert_units"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-21T14:49:42.454550Z"
+              },
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "call_1138169",
+                        "name": "convert_units",
+                        "response": {
+                          "status": "success",
+                          "original_value": 100,
+                          "from_unit": "km",
+                          "converted_value": 62.1371,
+                          "to_unit": "miles"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-21T14:49:44.693561Z"
+              },
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "100 kilometers is approximately **62.14 miles** (or 62.1371 miles)."
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-21T14:49:44.696647Z"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "prompt": {
+        "parts": [
+          {
+            "text": "What is 72 degrees Fahrenheit in Celsius?"
+          }
+        ],
+        "role": "user"
+      },
+      "responses": [
+        {
+          "response": {
+            "parts": [
+              {
+                "text": "**72°F** is approximately **22.22°C**."
+              }
+            ],
+            "role": "model"
+          }
+        }
+      ],
+      "eval_case_id": "temperature_conversion",
+      "agent_data": {
+        "agents": {
+          "math_converter_agent": {
+            "agent_id": "math_converter_agent",
+            "agent_type": "LlmAgent",
+            "description": "",
+            "instruction": "You are a helpful and precise Math and Unit Conversion assistant. Always use the `calculate_expression` tool to perform mathematical calculations, formulas, arithmetic, and percentages rather than estimating or calculating in your head. Always use the `convert_units` tool to convert between units of measurement (length, weight/mass, volume, and temperature). Provide clear and concise answers with the computed results and units.",
+            "tools": [
+              {
+                "function_declarations": [
+                  {
+                    "description": "Safely evaluates a mathematical expression and returns the calculated result.\n\nUse this tool whenever a calculation, arithmetic problem, percentage, or mathematical formula is needed.\n\nArgs:\n    expression: A string mathematical expression, e.g., '15 * 85.50 / 100', 'sqrt(144) + 10', or '(100 - 32) * 5 / 9'.\n\nReturns:\n    A dictionary with 'status', 'expression', and 'result' or 'error'.",
+                    "name": "calculate_expression",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "expression": {
+                          "title": "Expression",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "expression"
+                      ],
+                      "title": "calculate_expressionParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  }
+                ]
+              },
+              {
+                "function_declarations": [
+                  {
+                    "description": "Converts a value between common units of measurement (length, weight/mass, volume, temperature).\n\nArgs:\n    value: The numerical value to convert (e.g. 100, 32.5).\n    from_unit: The source unit (e.g. 'km', 'miles', 'kg', 'lbs', 'fahrenheit', 'celsius', 'liters', 'gallons').\n    to_unit: The target unit (e.g. 'miles', 'km', 'lbs', 'kg', 'celsius', 'fahrenheit', 'gallons', 'liters').\n\nReturns:\n    A dictionary with 'status', 'original_value', 'from_unit', 'converted_value', 'to_unit'.",
+                    "name": "convert_units",
+                    "parameters_json_schema": {
+                      "properties": {
+                        "value": {
+                          "title": "Value",
+                          "type": "number"
+                        },
+                        "from_unit": {
+                          "title": "From Unit",
+                          "type": "string"
+                        },
+                        "to_unit": {
+                          "title": "To Unit",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "value",
+                        "from_unit",
+                        "to_unit"
+                      ],
+                      "title": "convert_unitsParams",
+                      "type": "object"
+                    },
+                    "response_json_schema": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  }
+                ]
+              }
+            ],
+            "sub_agents": []
+          }
+        },
+        "turns": [
+          {
+            "turn_index": 0,
+            "turn_id": "turn_0",
+            "events": [
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_call": {
+                        "id": "call_176001",
+                        "args": {
+                          "value": 72,
+                          "from_unit": "fahrenheit",
+                          "to_unit": "celsius"
+                        },
+                        "name": "convert_units"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-21T14:49:42.516057Z"
+              },
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "call_176001",
+                        "name": "convert_units",
+                        "response": {
+                          "status": "success",
+                          "original_value": 72,
+                          "from_unit": "fahrenheit",
+                          "converted_value": 22.2222,
+                          "to_unit": "celsius"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                },
+                "event_time": "2026-09-21T14:49:47.637266Z"
+              },
+              {
+                "author": "math_converter_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "**72°F** is approximately **22.22°C**."
+                    }
+                  ],
+                  "role": "model"
+                },
+                "event_time": "2026-09-21T14:49:47.640860Z"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
