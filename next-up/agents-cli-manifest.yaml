@@ -1,4 +1,4 @@
-name: next-up
+name: next-binge
 acli_version: 1.6.1
 agent_directory: app
 region: us-east1
@@ -6,7 +6,7 @@ base_template: adk
 generated_at: '2026-09-21T14:43:18.449751+00:00'
 language: python
 create_params:
-  root_agent_name: next_up
+  root_agent_name: next_binge
   deployment_target: agent_runtime
   cicd_runner: skip
   is_a2a: true
