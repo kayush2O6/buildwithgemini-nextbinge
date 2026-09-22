@@ -125,8 +125,8 @@ async def _get_card(client: httpx.AsyncClient) -> AgentCard:
 
         # Static fallback ensures cold starts / gateway hiccups don't break UI
         _card = AgentCard(
-            name="next_up",
-            description="An ADK Agent",
+            name="next_binge",
+            description="NextBinge Entertainment Concierge ADK Agent",
             url=A2A_BASE,
             version="0.1.0",
             protocol_version="0.3",
