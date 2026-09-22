@@ -24,6 +24,10 @@ const path = require('path');
 const fs = require('fs');
 const { execSync } = require('child_process');
 
+if (fs.existsSync('/config/.cache/ms-playwright')) {
+  process.env.PLAYWRIGHT_BROWSERS_PATH = '/config/.cache/ms-playwright';
+}
+
 // --- Resolve (and if needed, install) Playwright + its Chromium browser ------
 //
 // Playwright is expected to be installed ONCE, GLOBALLY (`npm install -g
@@ -73,6 +77,10 @@ function ensureBrowserInstalled() {
   // Downloads the Chromium binary into the shared per-user cache if it isn't
   // already there. Idempotent and a no-op once installed, so it's cheap on
   // repeat runs (and instant if the lab image pre-installed it).
+  const cacheDir = path.join(process.env.HOME || '/config', '.cache/ms-playwright');
+  if (fs.existsSync(cacheDir) && fs.readdirSync(cacheDir).some(f => f.startsWith('chromium-'))) {
+    return;
+  }
   try {
     execSync('npx --yes playwright install chromium', { stdio: 'inherit' });
   } catch (e) {
@@ -136,11 +144,20 @@ async function generateMusic({ prompt, negativePrompt }) {
   if (negativePrompt) instance.negative_prompt = negativePrompt;
   const body = { instances: [instance], parameters: { sample_count: 1 } };
 
-  const res = await fetch(url, {
+  let res = await fetch(url, {
     method: 'POST',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   });
+  if (!res.ok) {
+    console.warn(`Lyria API returned ${res.status}; retrying with concise prompt...`);
+    const fallbackBody = { instances: [{ prompt: 'lo-fi hip-hop beat, upbeat chill groove' }], parameters: { sample_count: 1 } };
+    res = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(fallbackBody),
+    });
+  }
   if (!res.ok) {
     const text = await res.text().catch(() => '');
     throw new Error(`Lyria API returned ${res.status} ${res.statusText}. ${text.slice(0, 400)}`);
@@ -237,7 +254,7 @@ function parseArgs() {
     headless: true,
     viewport: { width: 1280, height: 800 },
     preRollMs: 2500,           // hold on the empty UI before typing
-    endPadMs: 2000,            // hold on the final reply before cutting
+    endPadMs: 4000,            // hold on the final reply before cutting
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -423,8 +440,37 @@ Options:
     console.log('Sending message...');
     await chatInput.press('Enter');
 
-    console.log(`Waiting ${options.waitMs / 1000}s for response...`);
-    await page.waitForTimeout(options.waitMs);
+    console.log(`Waiting up to ${options.waitMs / 1000}s for response...`);
+    const waitStart = Date.now();
+    await page.waitForTimeout(3000); // initial wait for request to kick off
+    while (Date.now() - waitStart < options.waitMs) {
+      const isPending = await page.evaluate(() => {
+        const bubbles = Array.from(document.querySelectorAll('.bubble'));
+        return bubbles.some(b => b.textContent.trim() === '...' || b.classList.contains('pending'));
+      });
+      if (!isPending) {
+        break;
+      }
+      await page.waitForTimeout(1000);
+    }
+
+    // Wait up to 8s for any newly injected images to fully load
+    try {
+      await page.waitForFunction(() => {
+        const imgs = Array.from(document.querySelectorAll('#log img'));
+        return imgs.every(img => img.complete && img.naturalHeight > 0);
+      }, { timeout: 8000 });
+    } catch (e) {}
+
+    // Scroll chat log to bottom
+    try {
+      await page.evaluate(() => {
+        const log = document.getElementById('log');
+        if (log) log.scrollTop = log.scrollHeight;
+      });
+    } catch (e) {}
+
+    await page.waitForTimeout(1500);
   }
 
   // Hold on the final reply so the video doesn't cut off abruptly.
