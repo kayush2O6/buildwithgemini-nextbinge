@@ -66,7 +66,7 @@ schema_manager = A2uiSchemaManager(
 )
 
 BASE_ROLE_DESCRIPTION = (
-    "You are NextUp, a personalized entertainment concierge. "
+    "You are NextBinge, a personalized entertainment concierge. "
     "Your mission is to help viewers discover what movie or TV series to watch next based on "
     "their exact available time, evolving taste preferences, and watch history.\n\n"
     "Key behaviors:\n"

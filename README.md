@@ -1,10 +1,10 @@
-# 🎬 NextUp — AI Entertainment & Streaming Concierge
+# 🎬 NextBinge — AI Entertainment & Streaming Concierge
 
 > **A conversational agent that helps viewers discover what to watch with a catalog of movies and TV series tailored to their available time slots and evolving taste preferences.**
 
 <div align="center">
 
-<img src="assets/demo.gif" alt="NextUp Live Demo" width="100%" style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.25);" />
+<img src="assets/demo.gif" alt="NextBinge Live Demo" width="100%" style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.25);" />
 
 <br/><br/>
 
@@ -21,13 +21,13 @@
 
 ## 📖 Overview
 
-Streaming fatigue and decision paralysis are ubiquitous: viewers spend more time scrolling through endless thumbnails than actually enjoying content. **NextUp** is an intelligent, agentic entertainment concierge that eliminates this friction.
+Streaming fatigue and decision paralysis are ubiquitous: viewers spend more time scrolling through endless thumbnails than actually enjoying content. **NextBinge** is an intelligent, agentic entertainment concierge that eliminates this friction.
 
-Instead of generic popularity lists, NextUp:
-- **Respects your available time slot**: Whether you have 45 minutes to unwind on a weeknight, 2 hours for a movie night, or a 3-day holiday weekend to binge an entire series, NextUp calculates runtimes and episode bundles to guarantee a perfect fit.
-- **Learns your evolving taste profile**: Powered by Vertex AI Memory Bank, NextUp remembers your favorite directors, preferred genres, watched titles, and specific feedback across conversations.
+Instead of generic popularity lists, NextBinge:
+- **Respects your available time slot**: Whether you have 45 minutes to unwind on a weeknight, 2 hours for a movie night, or a 3-day holiday weekend to binge an entire series, NextBinge calculates runtimes and episode bundles to guarantee a perfect fit.
+- **Learns your evolving taste profile**: Powered by Vertex AI Memory Bank, NextBinge remembers your favorite directors, preferred genres, watched titles, and specific feedback across conversations.
 - **Delivers rich visual previews**: Natively generates cinematic moodboard posters using **Imagen 3** and short video teasers using Google's **Omni model**, delivered via declarative **A2UI** cards.
-- **Deeply understands lore and themes**: Grounded in a comprehensive entertainment guide through **Vertex AI RAG Engine**, NextUp can explain complex narratives, episode benchmarks, and thematic parallels.
+- **Deeply understands lore and themes**: Grounded in a comprehensive entertainment guide through **Vertex AI RAG Engine**, NextBinge can explain complex narratives, episode benchmarks, and thematic parallels.
 
 ---
 
@@ -46,9 +46,9 @@ Instead of generic popularity lists, NextUp:
 
 ## ☁️ Google Cloud Tools & Architecture
 
-NextUp is built from the ground up on the **Google Cloud Agent Platform** ecosystem:
+NextBinge is built from the ground up on the **Google Cloud Agent Platform** ecosystem:
 
-| Google Cloud Tool | Role in NextUp | Implementation Details |
+| Google Cloud Tool | Role in NextBinge | Implementation Details |
 |---|---|---|
 | 🧠 **Vertex AI Memory Bank** | Cross-session long-term memory | Connected via `PreloadMemoryTool` and memory generation callbacks. Persists user taste, favorite directors, and historical watch feedback. |
 | 🗄️ **Google Cloud Firestore** | Structured catalog & state | Stores the catalog of movies and series in the `titles` collection. Tracks `watched` states, numeric ratings, and user reviews. |
@@ -150,13 +150,13 @@ export AGENT_DIRECTORY="app"
 export PORT=8080
 python frontend/main.py
 ```
-Open **`http://localhost:8080`** in your browser to chat with NextUp.
+Open **`http://localhost:8080`** in your browser to chat with NextBinge.
 
 ---
 
 ## 🧪 Evaluation
 
-NextUp includes a comprehensive 16-case benchmark dataset covering:
+NextBinge includes a comprehensive 16-case benchmark dataset covering:
 - Time-constrained recommendations (e.g. 45-minute evening slots).
 - Multi-day binge planning for holiday weekends.
 - Hollywood critic acclaim (Rotten Tomatoes $\ge 90\%$) vs. crowd-pleasers (Audience Score $\ge 90\%$).

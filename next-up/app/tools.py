@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Domain tools for NextUp entertainment concierge backed by Cloud Firestore."""
+"""Domain tools for NextBinge entertainment concierge backed by Cloud Firestore."""
 
 import base64
 import logging
@@ -809,7 +809,7 @@ def fetch_live_title_details(title: str) -> Dict[str, Any]:
 
 
 def search_entertainment_guide(query: str) -> str:
-    """Search the NextUp entertainment knowledge guide for deep analyses, lore, themes, episode breakdowns, and science behind movies and series.
+    """Search the NextBinge entertainment knowledge guide for deep analyses, lore, themes, episode breakdowns, and science behind movies and series.
 
     Use this tool when users ask in-depth questions about a film or TV show's plot,
     themes, scientific concepts (like time travel in Dark or linguistic relativity in Arrival),

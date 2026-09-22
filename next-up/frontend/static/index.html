@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextUp</title>
+<title>NextBinge — AI Entertainment & Streaming Guide</title>
 <!-- Optional: used only to draw A2UI Icon components. If it can't load (offline/
      corp network), icons fall back to showing their name as text. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
@@ -293,7 +293,7 @@
   <div class="header-brand">
     <span class="header-logo">🎬</span>
     <div class="header-title-box">
-      <span class="header-title">NextUp</span>
+      <span class="header-title">NextBinge</span>
       <span class="header-subtitle">AI Entertainment &amp; Streaming Guide</span>
     </div>
   </div>
@@ -309,7 +309,7 @@
   <button class="prompt-chip" type="button" data-prompt="Show me recommendations for mystery and thriller shows with media cards.">🎬 <strong>Top picks:</strong> mystery &amp; thriller series</button>
 </div>
 <form id="form">
-  <input id="input" placeholder="Ask NextUp for recommendations, movies, shows…" autocomplete="off" autofocus>
+  <input id="input" placeholder="Ask NextBinge for recommendations, movies, shows…" autocomplete="off" autofocus>
   <button class="send-btn">Send ➔</button>
 </form>
 
@@ -327,7 +327,7 @@ function bubble(who) {
 
   const content = el("div", "msg-content");
   const header = el("div", "msg-header");
-  const author = el("span", "msg-author", isUser ? "You" : "NextUp");
+  const author = el("span", "msg-author", isUser ? "You" : "NextBinge");
   const time = el("span", "msg-time", new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
   header.appendChild(author);
   header.appendChild(time);
@@ -500,7 +500,7 @@ function renderReply(b, parts) {
 
 // Initial welcoming greeting
 const welcomeBubble = bubble("agent");
-welcomeBubble.textContent = "👋 Welcome to NextUp! What are you in the mood to watch tonight? Pick an example prompt below or tell me your favorite genre and time limit!";
+welcomeBubble.textContent = "👋 Welcome to NextBinge! What are you in the mood to watch tonight? Pick an example prompt below or tell me your favorite genre and time limit!";
 
 // The proxy returns { parts: [{kind:"text",text} | {kind:"a2ui",data}] }.
 form.addEventListener("submit", async (ev) => {

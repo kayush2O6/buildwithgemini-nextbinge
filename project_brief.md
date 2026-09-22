@@ -1,4 +1,4 @@
-# My agent: NextUp
+# My agent: NextBinge
 One-liner: A conversational agent that helps viewers discover what to watch with a catalog of movies and TV series tailored to their available time slots and evolving taste preferences.
 
 Tool coverage:
