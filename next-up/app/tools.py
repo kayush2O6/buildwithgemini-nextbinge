@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 # which breaks Firestore after deployment.
 PROJECT_ID = "qwiklabs-gcp-03-f18f2b72d55a"
 COLLECTION_NAME = "titles"
-BUCKET_NAME = "nextup-media"
+BUCKET_NAME = "nextbinge-media"
 
 _db_instance: Optional[firestore.Client] = None
 
@@ -868,7 +868,7 @@ async def generate_title_poster(
         tool_context: Execution context for saving the artifact in the session.
 
     Returns:
-        The public HTTPS URL of the uploaded image (https://storage.googleapis.com/nextup-media/posters/<filename>).
+        The public HTTPS URL of the uploaded image (https://storage.googleapis.com/nextbinge-media/posters/<filename>).
     """
     clean_title = title.strip()
     if not clean_title:
@@ -952,7 +952,7 @@ async def generate_title_video(
         tool_context: Execution context for saving the artifact in the session.
 
     Returns:
-        The public HTTPS URL of the uploaded video (https://storage.googleapis.com/nextup-media/videos/<filename>).
+        The public HTTPS URL of the uploaded video (https://storage.googleapis.com/nextbinge-media/videos/<filename>).
     """
     clean_title = title.strip()
     if not clean_title:
@@ -1004,7 +1004,7 @@ async def generate_title_video(
         # 2. Upload video bytes directly to public Cloud Storage bucket
         from google.cloud import storage
 
-        bucket_name = "nextup-media"
+        bucket_name = "nextbinge-media"
         storage_client = storage.Client(project=PROJECT_ID)
         bucket = storage_client.bucket(bucket_name)
         object_name = f"videos/{filename}"

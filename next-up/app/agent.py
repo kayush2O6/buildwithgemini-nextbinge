@@ -131,7 +131,7 @@ instruction = schema_manager.generate_system_prompt(
 
 root_agent = Agent(
     # Keep in sync with agents-cli-manifest.yaml root_agent_name
-    name="next_up",
+    name="next_binge",
     model=Gemini(
         model=MODEL,
         retry_options=types.HttpRetryOptions(attempts=3),

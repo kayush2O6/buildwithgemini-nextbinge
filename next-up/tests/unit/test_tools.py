@@ -176,7 +176,7 @@ async def test_generate_title_poster_mocked(monkeypatch):
         tool_context=mock_tool_context,
     )
 
-    assert url == "https://storage.googleapis.com/nextup-media/posters/severance_poster.jpg"
+    assert url == "https://storage.googleapis.com/nextbinge-media/posters/severance_poster.jpg"
     mock_blob.upload_from_string.assert_called_once_with(fake_bytes, content_type="image/jpeg")
     mock_tool_context.save_artifact.assert_called_once()
     assert mock_tool_context.save_artifact.call_args[1]["filename"] == "severance_poster.jpg"
@@ -227,7 +227,7 @@ async def test_generate_title_video_mocked(monkeypatch):
         tool_context=mock_tool_context,
     )
 
-    assert url == "https://storage.googleapis.com/nextup-media/videos/severance_teaser.mp4"
+    assert url == "https://storage.googleapis.com/nextbinge-media/videos/severance_teaser.mp4"
     mock_interactions.create.assert_called_once()
     assert mock_interactions.create.call_args[1]["model"] == "gemini-omni-flash-preview"
     assert mock_interactions.create.call_args[1]["response_format"] == {"type": "video"}

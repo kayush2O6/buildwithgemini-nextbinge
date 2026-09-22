@@ -52,7 +52,7 @@ NextBinge is built from the ground up on the **Google Cloud Agent Platform** eco
 |---|---|---|
 | 🧠 **Vertex AI Memory Bank** | Cross-session long-term memory | Connected via `PreloadMemoryTool` and memory generation callbacks. Persists user taste, favorite directors, and historical watch feedback. |
 | 🗄️ **Google Cloud Firestore** | Structured catalog & state | Stores the catalog of movies and series in the `titles` collection. Tracks `watched` states, numeric ratings, and user reviews. |
-| 📦 **Google Cloud Storage** | Media asset repository | Public bucket (`gs://nextup-media`) hosting generated posters (`/posters`) and teaser videos (`/videos`) with public HTTP access. |
+| 📦 **Google Cloud Storage** | Media asset repository | Public bucket (`gs://nextbinge-media`) hosting generated posters (`/posters`) and teaser videos (`/videos`) with public HTTP access. |
 | 📖 **Vertex AI RAG Engine** | Grounded thematic retrieval | Serverless RAG corpus grounded on `data/entertainment_guide.txt`, exposed to the agent as a function tool (`search_entertainment_guide`). |
 | 🎨 **Imagen 3** | Cinematic poster generation | Model `imagen-3.0-generate-002` generating high-definition aesthetic moodboards and posters for titles in the catalog. |
 | 🎬 **Gemini Omni** | Short teaser video generation | Model `gemini-omni-flash-preview` producing short video teasers uploaded to GCS and saved in session artifacts. |
@@ -76,7 +76,7 @@ graph TD
         AgentRuntime -->|Generate Posters| Imagen3[Imagen 3]
         AgentRuntime -->|Generate Teasers| OmniModel[Gemini Omni Model]
         
-        Imagen3 -->|Store Assets| GCS[(Cloud Storage: nextup-media)]
+        Imagen3 -->|Store Assets| GCS[(Cloud Storage: nextbinge-media)]
         OmniModel -->|Store Video| GCS
         GCS -->|Public URLs| Frontend
     end
@@ -107,11 +107,11 @@ next-up/
 │   └── eval/
 │       ├── eval_config.yaml     # Custom response quality evaluation rubric
 │       └── datasets/
-│           ├── basic-dataset.json            # 16 single-turn benchmark test cases
-│           └── nextup_benchmark_dataset.json # Mirrored evaluation benchmark
+│           ├── basic-dataset.json               # 16 single-turn benchmark test cases
+│           └── nextbinge_benchmark_dataset.json # Mirrored evaluation benchmark
 ├── assets/
 │   └── demo.gif                 # Optimized looping demonstration recording
-├── nextup_demo.webm             # Full-length 1280x800 recorded demo video
+├── nextbinge_demo.webm          # Full-length 1280x800 recorded demo video
 ├── pyproject.toml               # Python project configuration & dependencies
 └── README.md                    # Project documentation
 ```
@@ -185,7 +185,7 @@ agents-cli deploy --project <PROJECT_ID> --region us-east1
 
 ### Deploy Frontend to Cloud Run
 ```bash
-gcloud run deploy next-up-frontend \
+gcloud run deploy next-binge-frontend \
   --source frontend \
   --region us-east1 \
   --allow-unauthenticated \

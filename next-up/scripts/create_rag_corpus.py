@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a serverless Vertex AI RAG corpus for NextUp and index the entertainment guide."""
+"""Create a serverless Vertex AI RAG corpus for NextBinge and index the entertainment guide."""
 
 import sys
 from vertexai.preview import rag
@@ -8,7 +8,7 @@ import vertexai
 
 PROJECT_ID = "qwiklabs-gcp-03-f18f2b72d55a"
 LOCATION   = "us-central1"                             # Serverless RAG mode is us-central1 only
-GCS_PATH   = "gs://nextup-media/rag/entertainment_guide.txt"
+GCS_PATH   = "gs://nextbinge-media/rag/entertainment_guide.txt"
 
 print(f"Initializing Vertex AI for project={PROJECT_ID}, location={LOCATION}...")
 vertexai.init(project=PROJECT_ID, location=LOCATION)
@@ -28,9 +28,9 @@ except Exception as e:
     print(f"Note on ragEngineConfig update: {e}")
 
 # 2. Create the corpus.
-print("Creating RAG corpus 'nextup-entertainment-guide'...")
+print("Creating RAG corpus 'nextbinge-entertainment-guide'...")
 corpus = rag.create_corpus(
-    display_name="nextup-entertainment-guide",
+    display_name="nextbinge-entertainment-guide",
     embedding_model_config=rag.EmbeddingModelConfig(
         publisher_model="publishers/google/models/text-embedding-005"
     ),
