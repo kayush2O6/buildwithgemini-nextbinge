@@ -7,6 +7,8 @@
 <!-- Optional: used only to draw A2UI Icon components. If it can't load (offline/
      corp network), icons fall back to showing their name as text. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+<!-- Markdown parser for rich formatted agent responses -->
+<script src="marked.min.js"></script>
 <style>
   :root {
     --accent: #7c3aed;
@@ -153,13 +155,12 @@
     color: var(--accent);
   }
   .bubble {
-    padding: 0.85rem 1.1rem;
+    padding: 0.85rem 1.15rem;
     border-radius: 4px 18px 18px 18px;
     background: var(--surface);
     border: 1px solid var(--border);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     text-align: left;
-    white-space: pre-wrap;
     line-height: 1.55;
     font-size: 0.95rem;
     color: var(--text-primary);
@@ -170,6 +171,10 @@
     border: none;
     border-radius: 18px 4px 18px 18px;
     box-shadow: 0 3px 10px rgba(124, 58, 237, 0.28);
+    white-space: pre-wrap;
+  }
+  .msg.agent .bubble {
+    white-space: normal;
   }
   .bubble.rich {
     background: transparent;
@@ -178,6 +183,86 @@
     padding: 0;
     max-width: 100%;
     white-space: normal;
+  }
+
+  /* Formatted Markdown Typography in Agent Messages */
+  .agent-markdown {
+    font-size: 0.95rem;
+    line-height: 1.62;
+    color: var(--text-primary);
+  }
+  .agent-markdown p {
+    margin: 0 0 0.85rem 0;
+  }
+  .agent-markdown p:last-child {
+    margin-bottom: 0;
+  }
+  .agent-markdown strong, .agent-markdown b {
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .agent-markdown em, .agent-markdown i {
+    font-style: italic;
+  }
+  .agent-markdown ul, .agent-markdown ol {
+    margin: 0.4rem 0 0.85rem 1.35rem;
+    padding: 0;
+  }
+  .agent-markdown li {
+    margin-bottom: 0.4rem;
+    line-height: 1.55;
+  }
+  .agent-markdown li:last-child {
+    margin-bottom: 0;
+  }
+  .agent-markdown h1, .agent-markdown h2, .agent-markdown h3, .agent-markdown h4 {
+    margin: 1.1rem 0 0.5rem 0;
+    font-weight: 700;
+    color: #1e1b4b;
+    line-height: 1.3;
+  }
+  .agent-markdown h1:first-child, .agent-markdown h2:first-child, .agent-markdown h3:first-child {
+    margin-top: 0;
+  }
+  .agent-markdown hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0.85rem 0;
+  }
+  .agent-markdown code {
+    background: #f1f5f9;
+    padding: 0.15rem 0.4rem;
+    border-radius: 5px;
+    font-size: 0.88em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #6d28d9;
+    border: 1px solid #e2e8f0;
+  }
+  .agent-markdown pre {
+    background: #0f172a;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 0.75rem 0;
+  }
+  .agent-markdown pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: #f8fafc;
+    font-size: 0.85rem;
+  }
+  .agent-markdown blockquote {
+    border-left: 3px solid var(--accent);
+    margin: 0.65rem 0;
+    padding: 0.25rem 0.85rem;
+    color: #475569;
+    background: #f8fafc;
+    border-radius: 0 8px 8px 0;
+  }
+  .agent-markdown a {
+    color: var(--accent);
+    text-decoration: underline;
   }
 
   /* Form and Input */
@@ -344,6 +429,44 @@ function bubble(who) {
 }
 
 /* ----------------------------------------------------------------------------
+ * Markdown Formatter
+ * Parses Markdown bold (**), italic (*), lists, headers, and code cleanly.
+ * Uses marked.js if loaded, with a robust built-in fallback.
+ * -------------------------------------------------------------------------- */
+function formatMarkdown(text) {
+  if (!text) return "";
+  if (typeof marked !== "undefined" && typeof marked.parse === "function") {
+    try {
+      marked.setOptions({
+        breaks: true,
+        gfm: true
+      });
+      let html = marked.parse(text);
+      // Strip any raw <script> tags for safe rendering
+      html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
+      return html;
+    } catch (e) {
+      console.warn("marked parsing error, falling back:", e);
+    }
+  }
+  // Safe built-in fallback parser
+  let s = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  s = s.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
+  s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+  s = s.replace(/^[*-]\s+(.+)$/gm, '<li>$1</li>');
+  s = s.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+  return s.split(/\n\n+/).map(p => {
+    if (p.startsWith('<ul>') || p.startsWith('<li>') || p.startsWith('<h')) return p;
+    return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+  }).join('');
+}
+
+/* ----------------------------------------------------------------------------
  * A2UI mini-renderer (v0.8 Basic Catalog subset).
  * Renders Card / Column / Row / Text / Divider / List / Image / Icon.
  * Anything else falls back to plain text (see renderReply). All text goes in via
@@ -397,7 +520,12 @@ function buildNode(id, comps, seen) {
       const hint = String(props.usageHint || "body").toLowerCase();
       if (["h1", "h2", "h3", "h4", "h5", "h6"].includes(hint)) t.classList.add("a2-" + hint);
       else if (hint === "caption") t.classList.add("a2-caption");
-      t.textContent = boundStr(props.text);
+      const str = boundStr(props.text);
+      if (str.includes("**") || str.includes("*") || str.includes("`") || str.includes("[") || str.includes("\n")) {
+        t.innerHTML = formatMarkdown(str);
+      } else {
+        t.textContent = str;
+      }
       return t;
     }
     case "Divider":
@@ -472,7 +600,9 @@ function renderReply(b, parts) {
 
   const textStr = texts.join("\n").trim();
   if (textStr) {
-    b.appendChild(el("div", null, textStr));
+    const textDiv = el("div", "agent-markdown");
+    textDiv.innerHTML = formatMarkdown(textStr);
+    b.appendChild(textDiv);
     const mp4Matches = textStr.match(/https?:\/\/[^\s"'<>]+\.mp4/g);
     if (mp4Matches) {
       for (const videoUrl of mp4Matches) {
@@ -500,7 +630,9 @@ function renderReply(b, parts) {
 
 // Initial welcoming greeting
 const welcomeBubble = bubble("agent");
-welcomeBubble.textContent = "👋 Welcome to NextBinge! What are you in the mood to watch tonight? Pick a recommended prompt below to discover titles, generate cinematic posters, and create teaser preview videos!";
+const welcomeDiv = el("div", "agent-markdown");
+welcomeDiv.innerHTML = formatMarkdown("👋 Welcome to **NextBinge**! What are you in the mood to watch tonight? Pick a recommended prompt below to discover titles, generate cinematic posters, and create teaser preview videos!");
+welcomeBubble.appendChild(welcomeDiv);
 
 // The proxy returns { parts: [{kind:"text",text} | {kind:"a2ui",data}] }.
 form.addEventListener("submit", async (ev) => {
